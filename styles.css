@@ -1,0 +1,201 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+header {
+  background-color: #c41e3a;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+nav {
+  background-color: #228B22;
+  padding: 10px;
+  text-align: center;
+}
+
+button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+section {
+  background-color: white;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+h2 {
+  color: #c41e3a;
+}
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+#webtoon-container {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.webtoon-panel {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.webtoon-panel img {
+  max-width: 100%;
+  height: auto;
+}
+
+footer {
+  background-color: #c41e3a;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Estilos para la nieve */
+.snowflake {
+  position: fixed;
+  top: -10px;
+  z-index: 9999;
+  user-select: none;
+  cursor: default;
+  animation: fall 10s linear infinite;
+}
+
+@keyframes fall {
+  0% {
+      transform: translateY(-10vh) rotate(0deg);
+  }
+  100% {
+      transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+/* Estilos para las luces */
+.christmas-light {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: twinkle 1s infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  nav button {
+      display: block;
+      width: 100%;
+      margin: 5px 0;
+  }
+
+  .image-container {
+      flex-direction: column;
+  }
+}
+
+#magical-moments {
+  background-color: #f8e8e8;
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.moments-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.moment-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.moment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+}
+
+.moment-card i {
+  font-size: 3em;
+  margin-bottom: 10px;
+  color: #c41e3a;
+}
+
+.moment-card p {
+  text-align: center;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .moments-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .moment-card {
+      width: 80%;
+      max-width: 200px;
+  }
+}
+
+#happiness-promise i {
+  color: #ff4d6d;
+}
+
+#happiness-promise:hover {
+  background-color: #ffe6e6;
+}
+
