@@ -108,7 +108,7 @@ gsap.from("section", {duration: 1, y: 50, opacity: 0, stagger: 0.3, scrollTrigge
 
 // Funciones para los Momentos Mágicos
 function showLoveLetter() {
-    alert("Mi querida Aurora,\n\nCada día a tu lado es un regalo. Tu sonrisa ilumina mi mundo y tu amor me hace la persona más afortunada. Gracias por ser mi compañera en esta hermosa aventura llamada vida.\n\nTe amo con todo mi corazón,\nTu amor");
+    alert("Mi querida Aurora,\n\nCada día para mi es un regalo al saber que estás allí para mi. Al ver tu sonrisa, ilumina mi mundo, me llena de felicidad, mi día se compone al momento. Gracias por siempre estar allí para mi, te prometo que cumpliré cada cosa que te he dicho, para crear ese futuro por el cual quiero luchar para los dos, para que seas feliz y hacerte sentir como la mujer mas especial en esta vida.\n\nTe amo con todo mi corazón,\nFabi");
 }
 
 function showHappinessPromise() {
@@ -130,9 +130,9 @@ function showHappinessPromise() {
     title.style.marginBottom = '15px';
 
     const message = document.createElement('p');
-    message.innerHTML = 'Aurora, mi Corazón:<br><br>' +
-        'Prometo que a partir de hoy, cada día será una nueva oportunidad para crear momentos felices juntos. ' +
-        'Las fiestas ya no serán un tiempo de tristeza, sino de alegría y amor. ' +
+    message.innerHTML = 'Aurora de mi Corazón:<br><br>' +
+        'Prometo que a partir de esta navidad, hacerla mas feliz y entretenida para ti, sé que no la has pasado bien pero quiero cambiar eso, si me permites, hacer esta época para ti feliz. ' +
+        'Esta época ya no será un tiempo de tristeza, sino de alegría y mucho amor. ' +
         'Estaré a tu lado para apoyarte, amarte y hacerte sonreír. ' +
         'Juntos, transformaremos cada momento en un recuerdo precioso.<br><br>' +
         'Te amo y siempre estaré aquí para ti.';
@@ -157,11 +157,11 @@ function showHappinessPromise() {
 
 function showWishJar() {
     const wishes = [
-        "Que cada día esté lleno de amor y risas",
-        "Que cumplamos todos nuestros sueños juntos",
+        "Que cada día sea una bendición, y esté lleno de amor y risas",
+        "Que cumplamos todos nuestros sueños juntos y tambien los de cada uno individual",
         "Que nuestra familia crezca en amor y felicidad",
         "Que siempre encontremos tiempo para aventuras",
-        "Que nuestro amor sea eterno y cada vez más fuerte"
+        "Que el amor que se cultive aquí sea eterno y cada vez más fuerte"
     ];
     
     const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
@@ -183,10 +183,10 @@ function showPhotoAlbum() {
     album.style.overflow = 'auto';
     
     const photos = [
-        { src: "https://via.placeholder.com/300x200?text=Foto+1", caption: "Nuestro primer día juntos" },
-        { src: "https://via.placeholder.com/300x200?text=Foto+2", caption: "Nuestra primera cita" },
-        { src: "https://via.placeholder.com/300x200?text=Foto+3", caption: "Nuestro viaje a la playa" },
-        { src: "https://via.placeholder.com/300x200?text=Foto+4", caption: "Celebrando nuestro aniversario" }
+        { src: "https://via.placeholder.com/300x200?text=Foto+1", caption: "acá poner algo bonito para ella" },
+        { src: "https://via.placeholder.com/300x200?text=Foto+2", caption: "acá tambien" },
+        { src: "https://via.placeholder.com/300x200?text=Foto+3", caption: "también acá" },
+        { src: "https://via.placeholder.com/300x200?text=Foto+4", caption: "y acá" }
     ];
     
     photos.forEach(photo => {
@@ -230,3 +230,128 @@ document.getElementById('love-letter').addEventListener('click', showLoveLetter)
 document.getElementById('happiness-promise').addEventListener('click', showHappinessPromise);
 document.getElementById('wish-jar').addEventListener('click', showWishJar);
 document.getElementById('photo-album').addEventListener('click', showPhotoAlbum);
+
+// Clase para manejar el Webtoon
+class WebtoonController {
+    constructor() {
+        this.container = document.getElementById('webtoon-container');
+        this.currentPage = 0;
+        this.pages = [
+            {
+                image: 'webtoon/page1.jpg',
+                text: 'El día que te conocí, mi mundo se llenó de color...'
+            },
+            {
+                image: 'webtoon/page2.jpg',
+                text: 'Cada momento contigo es un regalo especial...'
+            },
+            {
+                image: 'webtoon/page3.jpg',
+                text: 'Nuestras risas, nuestros abrazos...'
+            },
+            {
+                image: 'webtoon/page4.jpg',
+                text: 'Y ahora, en esta Navidad, quiero decirte...'
+            },
+            {
+                image: 'webtoon/page5.jpg',
+                text: 'Que eres el amor de mi vida ❤️'
+            }
+        ];
+        this.initializeWebtoon();
+    }
+
+    initializeWebtoon() {
+        // Crear controles de navegación
+        const controls = document.createElement('div');
+        controls.className = 'webtoon-controls';
+        controls.innerHTML = `
+            <button id="prevPage"><i class="fas fa-chevron-left"></i></button>
+            <span id="pageCounter">1/${this.pages.length}</span>
+            <button id="nextPage"><i class="fas fa-chevron-right"></i></button>
+        `;
+        this.container.appendChild(controls);
+
+        // Crear contenedor de páginas
+        const pageContainer = document.createElement('div');
+        pageContainer.className = 'webtoon-page';
+        this.container.appendChild(pageContainer);
+
+        // Event listeners
+        document.getElementById('prevPage').addEventListener('click', () => this.previousPage());
+        document.getElementById('nextPage').addEventListener('click', () => this.nextPage());
+
+        // Mostrar primera página
+        this.showPage(0);
+
+        // Añadir gestos táctiles
+        let touchStartX = 0;
+        this.container.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+
+        this.container.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > 50) { // Umbral mínimo para considerar el swipe
+                if (diff > 0) {
+                    this.nextPage();
+                } else {
+                    this.previousPage();
+                }
+            }
+        });
+    }
+
+    showPage(index) {
+        const page = this.pages[index];
+        const pageContainer = this.container.querySelector('.webtoon-page');
+        
+        // Animación de transición
+        gsap.to(pageContainer, {
+            opacity: 0,
+            duration: 0.3,
+            onComplete: () => {
+                pageContainer.innerHTML = `
+                    <div class="webtoon-image">
+                        <img src="${page.image}" alt="Página ${index + 1}">
+                    </div>
+                    <div class="webtoon-text">
+                        <p>${page.text}</p>
+                    </div>
+                `;
+
+                gsap.to(pageContainer, {
+                    opacity: 1,
+                    duration: 0.3
+                });
+            }
+        });
+
+        // Actualizar contador
+        document.getElementById('pageCounter').textContent = `${index + 1}/${this.pages.length}`;
+        this.currentPage = index;
+    }
+
+    nextPage() {
+        if (this.currentPage < this.pages.length - 1) {
+            this.showPage(this.currentPage + 1);
+        }
+    }
+
+    previousPage() {
+        if (this.currentPage > 0) {
+            this.showPage(this.currentPage - 1);
+        }
+    }
+}
+
+// Añadir esto en la función de inicialización existente
+document.addEventListener('DOMContentLoaded', () => {
+    // ... código existente ...
+    
+    const webtoonController = new WebtoonController();
+    
+    // ... resto del código existente ...
+});
